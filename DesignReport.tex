@@ -32,8 +32,18 @@
 [PICTURE OF FINAL DASHBOARD]
 
 [BRIEF DESCRIPTION OF HOW THE DRIVER CAN INTERFACE WITH IT]
+The driver is able to interface with the dashboard / main controller through several switches. Firstly are the two switches which are wired to the dashboard; they can be used to configure what data is shown on the $7$ Segment Displays. For example, the left display could always show speed and the right display can toggle between battery level and temperature using the switches.
+
+In addition to this there are two potentiometers which are connected to the break and acceleration pedals. The signal from this is converted into a digital signal using the ADC within the Launchpad. These signals are used to set the car's speed. There are also two more switches, one is ignition and the other is the directional indicator. 
+
 
 [BLOCK DIAGRAM/SCHEMATIC OF MAIN CONTROLLER/DASHBOARD]
+The schematic of the dashboard can be found in Figure \ref{fig:dashboard_schematic}. This board is to be directly connected to the main controller board, the schematic of which can be found [ADD MAINBOARD SCHEMATIC].
+\begin{figure}%
+\includegraphics[width=\columnwidth]{dashboard_schematic.jpg}%
+\caption{Dashboard Schematic}%
+\label{fig:dashboard_schematic}%
+\end{figure}
 
 [EXPLANATION OF WHAT INPUTS THE MAIN CONTROLLER HANDLES AND WHAT OUTPUTS IT CONTROLS]
 
