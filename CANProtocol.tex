@@ -1,5 +1,119 @@
-[BRIEF DESCRIPTION OF CAN AND WHY ITS BEING USED]
+[BRIEF DESCRIPTION OF CAN AND WHY ITS BEING USED]\\
 
-[PRETTY SCHEMATIC/BLOCK DIAGRAM TO DO WITH CAN]
+[PRETTY SCHEMATIC/BLOCK DIAGRAM TO DO WITH CAN]\\
 
-[EXPLANATION OF PRETTY PICTURE AND VERY BRIEF SUMMARY]
+[EXPLANATION OF PRETTY PICTURE AND VERY BRIEF SUMMARY]\\
+
+\begin{tikzpicture} [every node/.style={text height=0.7em}]
+\matrix(canframe)[matrix of nodes, nodes in empty cells, align=center, style={text width=0.7em}]
+{
+%	  &   &   &   &   &   &   &   &   &   &   & \rotatebox[]{90}{Request Remote Frame}&
+%	  \rotatebox[]{90}{ID Ext.}&
+%	  \rotatebox[]{90}{Reserved}&   &   &   &   &   &   &   &   &  lol\\
+	0 &
+	0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 1 & 1 & 0 &
+	0 & 0 & 0 & 0 & 1 & 0 & A & A & A & A & B & B & B & B & 1 & 0 & 1 & 0\\
+};
+% Matrix is called 'mat' first number is row, second numer is column
+\node[black,above,style={text height=3.5em}, text width=0.7em] (SoF) at (canframe-1-1.north){\rotatebox[]{90}{Start Of Frame} };
+\draw[thick,black] (canframe-1-1.south west) -| (SoF.north west);
+\draw[thick,black,name path=SoFr] (canframe-1-2.south west) -| (SoF.north east);
+
+\node[black,above,style={text height=3.5em, text width=0.7em}] (RFR) at (canframe-1-13.north){\rotatebox[]{90}{Requ. Remote} };
+\draw[thick,black, name path=Requ] (canframe-1-13.south west) -| (RFR.north west);
+\draw[thick,black, name path=RequR] (canframe-1-14.south west) -| (RFR.north east);
+
+
+
+\node[black,above,style={text height=3.5em, text width=0.7em}] (ID) at (canframe-1-14.north){\rotatebox[]{90}{ID Ext.} };
+%\draw[thick,black] (canframe-1-13.south west) -| (ID.north west);
+%\draw[thick,black] (canframe-1-14.south west) -| (ID.north east);
+\node[black,above,style={text height=2.5em, text width=0.7em}] (Resv) at (canframe-1-15.north){\rotatebox[]{90}{Reserved} };
+\draw[thick,black, name path=Resvln] (canframe-1-15.south east) |- (Resv.north east);
+%\draw[thick,black] (canframe-1-15.north east) |- (canframe-2-15.south east);
+%\draw[thick,black] (canframe-2-15.south east) |- (canframe-2-15.south east);
+\path[name path=tophoriz] (RFR.north east) -- ++(20em, 0);
+\path[name path=CtlDatGuide] (canframe-1-19.north east) -- ++(0,8.7em);
+\draw[thick,black,name path=CtlDat, name intersections={of=CtlDatGuide and tophoriz,by={Top}}] (canframe-1-19.south east) -- (Top);
+
+%Node ID
+\node [above= 6em of {$(canframe-1-2.west)!0.5!(canframe-1-12.east)$}, align=center] (NodeID) {Node ID};
+
+\path[name path=horiz1](NodeID.west) -- ++(-6em,0);
+\draw[->,thick,black,name intersections={of=SoFr and horiz1,by={Int1}}] (NodeID.west) -- (Int1);
+
+\path[name path=horiz2](NodeID.east) -- ++(6em,0);
+\draw[->,thick,black,name intersections={of=Requ and horiz2,by={Int2}}] (NodeID.east) -- (Int2);
+
+
+%11 Bits
+\node [above= 3em of {$(canframe-1-2.west)!0.5!(canframe-1-12.east)$}, align=center] (11bits) {11 Bits};
+
+\path[name path=horiz3](11bits.west) -- ++(-6em,0);
+\draw[->,thick,black,name intersections={of=SoFr and horiz3,by={Int3}}] (11bits.west) -- (Int3);
+
+\path[name path=horiz4](11bits.east) -- ++(6em,0);
+\draw[->,thick,black,name intersections={of=Requ and horiz4,by={Int4}}] (11bits.east) -- (Int4);
+
+
+%Control
+\node [above= 6em of {$(canframe-1-14.west)!0.5!(canframe-1-19.east)$}, align=center] (Control) {Control};
+
+\path[name path=horiz5](Control.west) -- ++(-5em,0);
+\draw[->,thick,black,name intersections={of=RequR and horiz5,by={Int5}}] (Control.west) -- (Int5);
+
+\path[name path=horiz6](Control.east) -- ++(5em,0);
+\draw[->,thick,black,name intersections={of=CtlDat and horiz6,by={Int6}}] (Control.east) -- (Int6);
+
+
+%Data Length
+\node [above = 3em of {$(canframe-1-16.west)!0.5!(canframe-1-19.east)$}, align=center] (datlen) {Data\\Length};
+\node [below, align=center] (bytes) at (datlen.south) {(Bytes)};
+
+\path[name path=horiz7](datlen.west) -- ++(-5em,0);
+\draw[->,thick,black,name intersections={of=Resvln and horiz7,by={Int7}}] (datlen.west) -- (Int7);
+
+\path[name path=horiz8](datlen.east) -- ++(5em,0);
+\draw[->,thick,black,name intersections={of=CtlDat and horiz8,by={Int8}}] (datlen.east) -- (Int8);
+
+
+\path[name path=DatEndGuide] (canframe-1-27.north east) -- ++(0,8.7em);
+\draw[thick,black,name path=DatEnd, name intersections={of=DatEndGuide and tophoriz,by={Top}}] (canframe-1-27.south east) -- (Top);
+
+%Data
+\node [above = 6em of {$(canframe-1-20.west)!0.5!(canframe-1-27.east)$}, align=center] (data) {Data};
+\node [below, align=center] (bytes) at (data.south) {(8 Bytes Max)};
+
+\path[name path=horiz9](data.west) -- ++(-5em,0);
+\draw[->,thick,black,name intersections={of=CtlDat and horiz9,by={Int9}}] (data.west) -- (Int9);
+
+\path[name path=horiz10](data.east) -- ++(5em,0);
+\draw[->,thick,black,name intersections={of=DatEnd and horiz10,by={Int10}}] (data.east) -- (Int10);
+
+
+\path[name path=DatEndGuide] (canframe-1-27.north east) -- ++(0,8.7em);
+\draw[thick,black,name path=DatEnd, name intersections={of=DatEndGuide and tophoriz,by={Top}}] (canframe-1-27.south east) -- (Top);
+
+\node [above = 5em of {$(canframe-1-28.west)!0.5!(canframe-1-31.east)$}, align=center] (ROF) {Rest of \\Frame};
+
+\draw[->,thick,black] (canframe-1-27.east) |- ++(5em,4em);
+\draw[thick,black] (canframe-1-1.north west) -- (canframe-1-31.north east);
+\draw[thick,black] (canframe-1-1.south west) -- (canframe-1-31.south east);
+
+\begin{scope}[yshift=-8em]
+\matrix(dats)[matrix of nodes, nodes in empty cells, align=center, text width=0.7em]
+{
+	0& 1 & 1 & 0 & 1 &
+	1 & 1 & 0 & 0 & 1 & 0 & 0 &	1 & 0 & 0 & 0 &
+	0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 &
+	1 & 0 & 0 & 1 & 0 & 1 & 1 & 0 \\
+	\tiny 1 & \tiny 2 & \tiny 3 & \tiny 4 & \tiny 5 & \tiny 6 & \tiny 7 & \tiny 8 & \tiny 9 & \tiny 10 & \tiny 11 & \tiny 12 & \tiny 13 & \tiny 14 & \tiny 15 & \tiny 16 & \tiny 17 & \tiny 18 & \tiny 19 & \tiny 20 & \tiny 21 & \tiny 22 & \tiny 23 & \tiny 24 & \tiny 25 & \tiny 26 & \tiny 27 & \tiny 28 & \tiny 29 & \tiny 30 & \tiny 31 & \tiny 32
+	\\
+};
+\end{scope}
+\draw[dashed, black] (canframe-1-20.south west) -- (dats-1-1.north west);
+\draw[dashed, black] (canframe-1-23.south east) -- (dats-1-32.north east);
+\draw[thick,black] (dats-1-1.north west) -- (dats-1-32.north east);
+\draw[thick,black] (dats-1-1.south west) -- (dats-1-32.south east);
+
+\end{tikzpicture}
