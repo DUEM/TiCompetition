@@ -36,7 +36,7 @@
 [BRIEF DESCRIPTION OF HOW THE DRIVER CAN INTERFACE WITH IT]
 The driver is able to interface with the dashboard / main controller through several switches. Firstly are the two switches which are wired to the dashboard; they can be used to configure what data is shown on the $7$ Segment Displays. For example, the left display could always show speed and the right display can toggle between battery level and temperature using the switches.
 
-In addition to this there are two potentiometers which are connected to the break and acceleration pedals. The signal from this is converted into a digital signal using the ADC within the Launchpad. These signals are used to set the car's speed. There are also two more switches, one is ignition and the other is the directional indicator. 
+In addition to this there are two potentiometers which are connected to the break and acceleration pedals. The signal from this is converted into a digital signal using the ADC within the Launchpad. These signals are used to set the car's speed. There are also two more switches, one is ignition and the other is the directional indicator.
 
 
 [BLOCK DIAGRAM/SCHEMATIC OF MAIN CONTROLLER/DASHBOARD]
@@ -80,7 +80,7 @@ The first component of the telemetry system is the interface between the data lo
 
 The data is filtered by node and data type and is then saved to an SQL server running on the data logger. It is critically important that the data logger program can handle errors and consistently. If the program were to crash or incorrectly filter the data, the system could give incorrect data to the engineers leading to erroneous decisions or could completely stop working.
 
-Once the data has been saved to the SQL server, the engineers can access or send data remotely over a tcp connection via a separate program on their computer. 
+Once the data has been saved to the SQL server, the engineers can access or send data remotely over a tcp connection via a separate program on their computer.
 
 This is clearly a very powerful system allowing telemetry data to be sent and received from, theoretically,  anywhere in the world. If for example the nodes where in fact not just sensors but active components, it would be conceivable to drive the car from anywhere with an internet connection, thousands of miles away from the car itself.
 \end{document}
