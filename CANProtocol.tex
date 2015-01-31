@@ -1,11 +1,9 @@
-
 [BRIEF DESCRIPTION OF CAN AND WHY ITS BEING USED]\\
 
 [PRETTY SCHEMATIC/BLOCK DIAGRAM TO DO WITH CAN]\\
 
 [EXPLANATION OF PRETTY PICTURE AND VERY BRIEF SUMMARY]\\
-\tikzfading[name=fade right,
-	left color=transparent!0, right color=transparent!5]
+
 \begin{tikzpicture} [every node/.style={text height=0.7em}]
 \matrix(canframe)[matrix of nodes, nodes in empty cells, align=center, style={text width=0.7em}]
 {
@@ -162,7 +160,7 @@
 \draw[->,thick,black,name intersections={of=endFlags and MTypeR,by={Int15}}] (ErrorData.east) -- (Int15);
 
 %Error Fill
-\fill[color=black, opacity=0.05,name=ErrorFill] (ERR.north west) rectangle ($(Int15) +(0,-1em)$);
+%\fill[color=black, opacity=0.05,name=ErrorFill] (ERR.north west) rectangle ($(Int15) +(0,-1em)$);
 
 
 %Data Transmit
@@ -178,7 +176,7 @@
 \draw[->,thick,black,name intersections={of=startFlags and DataIDR,by={Int17}}] (DataID.east) -- (Int17);
 
 %Data Transmit Fill
-\fill[color=black, opacity=0.05, name=DtransFill] (DatTrans.north west) rectangle ($(Int17) +(0,-1em)$);
+%\fill[color=black, opacity=0.05, name=DtransFill] (DatTrans.north west) rectangle ($(Int17) +(0,-1em)$);
 
 
 %Data Request
@@ -194,7 +192,7 @@
 \draw[->,thick,black,name intersections={of=startFlags and DataRIDR,by={Int19}}] (DataRID.east) -- (Int19);
 
 %Data Request Fill
-\fill[color=black, opacity=0.05] (DatReq.north west) rectangle ($(Int19) +(0,-1em)$);
+%\fill[color=black, opacity=0.05] (DatReq.north west) rectangle ($(Int19) +(0,-1em)$);
 
 %Broadcast Request
 \node[below right] (BrdReq) at ($(Int18) + (0,-2em)$){\scriptsize Broadcast Request};
@@ -209,7 +207,7 @@
 \draw[->,thick,black,name intersections={of=startFlags and BRIDR,by={Int21}}] (BRID.east) -- (Int21);
 
 %Broadcast Request Fill
-\fill[color=black, opacity=0.05, ] (BrdReq.north west) rectangle ($(Int21) +(0,-1em)$);
+%\fill[color=black, opacity=0.05, ] (BrdReq.north west) rectangle ($(Int21) +(0,-1em)$);
 
 
 %Broadcast Request
@@ -225,7 +223,7 @@
 \draw[->,thick,black,name intersections={of=startFlags and PSetR,by={Int23}}] (PSet.east) -- (Int23);
 
 %Parameter Set Fill
-\fill[color=black, opacity=0.05, name=PSetFill] (PS.north west) rectangle ($(Int23) +(0,-1em)$);
+%\fill[color=black, opacity=0.05, name=PSetFill] (PS.north west) rectangle ($(Int23) +(0,-1em)$);
 
 %Flags
 \node [below = 13em of {$(dats-2-25.south west)!0.5!(dats-2-32.south east)$}, align=center,style={text height=0.7em, text depth = 0em}] (Flags) {Flags};
@@ -237,9 +235,18 @@
 \draw[->,thick,black,name intersections={of=endFlags and FlagsR,by={Int25}}] (Flags.east) -- (Int25);
 %Flags fill
 \path[name path=DatTransL](DatTrans.north west) -- ++(12em,0);
-\fill[color=black, opacity=0.05,name intersections={of=startFlags and DatTransL,by={Int26}}] (Int26) rectangle ($(Int15)+(0,-21em)$);
+%\fill[color=black, opacity=0.05,name intersections={of=startFlags and DatTransL,by={Int26}}] (Int26) rectangle ($(Int15)+(0,-21em)$);
 
 %Data Field
 \node[below right] (DataField) at ($(Int13) + (11*0.7,-2.7em)$){Data};
 \draw[->,thick,black] ($(DataField.south west)+(0,-1em)$) -- ++(3em,0);
+	\tiny 1 & \tiny 2 & \tiny 3 & \tiny 4 & \tiny 5 & \tiny 6 & \tiny 7 & \tiny 8 & \tiny 9 & \tiny 10 & \tiny 11 & \tiny 12 & \tiny 13 & \tiny 14 & \tiny 15 & \tiny 16 & \tiny 17 & \tiny 18 & \tiny 19 & \tiny 20 & \tiny 21 & \tiny 22 & \tiny 23 & \tiny 24 & \tiny 25 & \tiny 26 & \tiny 27 & \tiny 28 & \tiny 29 & \tiny 30 & \tiny 31 & \tiny 32
+	\\
+};
+\end{scope}
+\draw[dashed, black] (canframe-1-20.south west) -- (dats-1-1.north west);
+\draw[dashed, black] (canframe-1-23.south east) -- (dats-1-32.north east);
+\draw[thick,black] (dats-1-1.north west) -- (dats-1-32.north east);
+\draw[thick,black] (dats-1-1.south west) -- (dats-1-32.south east);
+
 \end{tikzpicture}
