@@ -1,5 +1,5 @@
 [BRIEF DESCRIPTION OF CAN AND WHY ITS BEING USED]\\
-
+SEE IF STUFF IS WORKING
 [PRETTY SCHEMATIC/BLOCK DIAGRAM TO DO WITH CAN]\\
 
 [EXPLANATION OF PRETTY PICTURE AND VERY BRIEF SUMMARY]\\
@@ -103,17 +103,54 @@
 \begin{scope}[yshift=-8em]
 \matrix(dats)[matrix of nodes, nodes in empty cells, align=center, text width=0.7em]
 {
+		\tiny 1 & \tiny 2 & \tiny 3 & \tiny 4 & \tiny 5 & \tiny 6 & \tiny 7 & \tiny 8 & \tiny 9 & \tiny 10 & \tiny 11 & \tiny 12 & \tiny 13 & \tiny 14 & \tiny 15 & \tiny 16 & \tiny 17 & \tiny 18 & \tiny 19 & \tiny 20 & \tiny 21 & \tiny 22 & \tiny 23 & \tiny 24 & \tiny 25 & \tiny 26 & \tiny 27 & \tiny 28 & \tiny 29 & \tiny 30 & \tiny 31 & \tiny 32
+		\\
 	0& 1 & 1 & 0 & 1 &
 	1 & 1 & 0 & 0 & 1 & 0 & 0 &	1 & 0 & 0 & 0 &
 	0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 &
 	1 & 0 & 0 & 1 & 0 & 1 & 1 & 0 \\
-	\tiny 1 & \tiny 2 & \tiny 3 & \tiny 4 & \tiny 5 & \tiny 6 & \tiny 7 & \tiny 8 & \tiny 9 & \tiny 10 & \tiny 11 & \tiny 12 & \tiny 13 & \tiny 14 & \tiny 15 & \tiny 16 & \tiny 17 & \tiny 18 & \tiny 19 & \tiny 20 & \tiny 21 & \tiny 22 & \tiny 23 & \tiny 24 & \tiny 25 & \tiny 26 & \tiny 27 & \tiny 28 & \tiny 29 & \tiny 30 & \tiny 31 & \tiny 32
-	\\
 };
 \end{scope}
-\draw[dashed, black] (canframe-1-20.south west) -- (dats-1-1.north west);
-\draw[dashed, black] (canframe-1-23.south east) -- (dats-1-32.north east);
-\draw[thick,black] (dats-1-1.north west) -- (dats-1-32.north east);
-\draw[thick,black] (dats-1-1.south west) -- (dats-1-32.south east);
+\draw[dashed, black] (canframe-1-20.south west) to[out=-120, in=90, distance = 5em] (dats-2-1.north west);
+\draw[dashed, black] (canframe-1-23.south east) to[out=-60, in=90, distance = 5em] (dats-2-32.north east);
+\draw[thick,black] (dats-2-1.north west) -- (dats-2-32.north east);
+\draw[thick,black] (dats-2-1.south west) -- (dats-2-32.south east);
 
+\draw[thick,black,name path=startType] (dats-2-1.north west) -- ++(0,-5em);
+\draw[thick,black,name path=startTarget] (dats-2-6.north west) -- ++(0,-5em);
+\draw[thick,black,name path=startID] (dats-2-17.north west) -- ++(0,-25em);
+\draw[thick,black,name path=startFlags] (dats-2-25.north west) -- ++(0,-25em);
+\draw[thick,black,name path=endFlags] (dats-2-32.north east) -- ++(0,-25em);
+
+%Message Type
+\node [below = 3em of {$(dats-2-1.west)!0.5!(dats-2-5.east)$}, align=center,style={text height=0.7em, text depth = 0em}] (MType) {Message\\ Type};
+
+\path[name path=MTypeL](MType.west) -- ++(-1.5em,0);
+\draw[->,thick,black,name intersections={of=startType and MTypeL,by={Int11}}] (MType.west) -- (Int11);
+
+\path[name path=MTypeR](MType.east) -- ++(39em,0);
+\draw[->,thick,black,name intersections={of=startTarget and MTypeR,by={Int12}}] (MType.east) -- (Int12);
+
+
+%Target ID
+\node [below = 3em of {$(dats-2-6.west)!0.5!(dats-2-16.east)$}, align=center,style={text height=0.7em, text depth = 0em}] (Target) {Target Node ID / Global};
+
+\draw[->,thick,black] (Target.west) -- (Int12);
+
+\draw[->,thick,black,name intersections={of=startID and MTypeR,by={Int13}}] (Target.east) -- (Int13);
+
+
+%Error
+\node[below right] (ERR) at (dats-2-17.south west){\footnotesize ERROR};
+
+%Error ID
+\node [below = 3em of {$(dats-2-17.west)!0.5!(dats-2-24.east)$}, align=center,style={text height=0.7em, text depth = 0em}] (Error) {Error ID};
+
+\draw[->,thick,black] (Error.west) -- (Int13);
+
+\draw[->,thick,black,name intersections={of=startFlags and MTypeR,by={Int14}}] (Error.east) -- (Int14);
+
+%Error Hatch
+\fill[color=black, opacity=0.1] (dats-2-17.south west) rectangle ($(Int14) +(0,-1em)$);
 \end{tikzpicture}
+lololololololololo
