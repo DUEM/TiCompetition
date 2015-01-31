@@ -111,6 +111,9 @@ acs-*.bib
 *.sympy
 sympy-plots-for-*.tex/
 
+# texstudio
+*.txss
+
 # todonotes
 *.tdo
 
