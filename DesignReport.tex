@@ -29,7 +29,7 @@ Apart from being able to control systems the driver must also be relayed importa
 To comply with regulations the vehicle must have indicators which alert other road users of the drivers intentions. [REWORD A BIT CLUNKY] The indicators must pulse on and off at 90 pulses per minute when the indicators are active. 
 
 \begin{figure}[H]
-[Diagram of Indicators wiring]
+\includegraphics[width=\columnwidth]{555Circuit}%
 \caption{Wiring Diagram of the Indicator Drivers}
 \label{Fig:IndicatorWiring}
 \end{figure}
@@ -143,4 +143,7 @@ The data is filtered by node and data type and is then saved to an SQL server ru
 Once the data has been saved to the SQL server, the engineers can access or send data remotely over a tcp connection via a separate program on their computer.
 
 This is clearly a very powerful system allowing telemetry data to be sent and received from, theoretically,  anywhere in the world. If for example the nodes where in fact not just sensors but active components, it would be conceivable to drive the car from anywhere with an internet connection, thousands of miles away from the car itself.
+
+\section{Voltage Rails}
+In order to create 12V and 5V rails from the 48V unregulated batteries the LM2576HV was used as a buck converter to regulate and step down the voltage. However, the 3A maximum output current would not be enough to power all the systems within the vehicle. To resolve this issue several modules where used and daisy chained together in order to provide rails which can provide a sufficient amount of power for all the systems. 
 \end{document}
