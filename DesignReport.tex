@@ -38,7 +38,13 @@ As shown in Figure \ref{Fig:IndicatorWiring} a 555 timer is used to control a 12
 
 \subsection{Brake Lights}
 
-Rear brake lights must be fitted to the vehicle which activate automatically when the driver activates the brakes. In order to detect when the driver applies the brakes a micro switch is fitted to the brake pedal and hand brake lever. The switches are wired in parallel and control the power going to the brake light drivers. [PICTURE/SCHEMATIC?]
+Rear brake lights must be fitted to the vehicle which activate automatically when the driver activates the brakes. In order to detect when the driver applies the brakes a micro switch is fitted to the brake pedal and hand brake lever. The switches are wired in parallel and control the power going to the brake light drivers. 
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{BrakeLightControl.png}%
+\caption{Brake Light Control Schematic}
+\label{Fig:BrakeLightsWiring}
+\end{figure}
 
 \subsection{Controlling the Motor}
 In order to set the speed of the vehicle the motor controller needs to be sent messages with a target speed for the motor. The motor controller uses this information to control the amount of power fed into the motor in order to control its speed. The messages are sent via the CAN bus of the vehicle allowing for any device attached to the CAN bus to have access to information such as speed and motor power consumption. 
@@ -46,7 +52,12 @@ In order to set the speed of the vehicle the motor controller needs to be sent m
 As the driver would likely be travelling at roughly the same speed for the entirety of their three hour sessions it was decided that a cruise control system would be most suitable. Where the driver holds down a dead man switch and controls the speed using a potentiometer located near the driver.
 
 The device which takes take of all the driver inputs is known as the main controller. The main controller reads the state of the accelerator pedal which acts as a dead man switch. If the accelerator is pressed the main controller then reads the value of the speed control which acts as an analogue input to the main controller. After encoding the analogue value it is sent over the CAN bus to the motor controller. A third input is attached to the main controller which controls whether the motor will go forwards, backwards or act as a brake. This tristate switch when in the forward state will cause the main controller to behave as previously described. When in the brake state it will cause the main controller to only send the motor controller a command which tells it to keep the motor stationary. This command will be sent until the switch is placed into another state. Finally, if the switch is placed into the reverse position the main controller will activate the rear view camera as well as altering the speed command that is sent to the motor controller such that it will cause the motor to rotate backwards.
-[NEED DIAGRAMS IN THIS SECTION]
+
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{MotorControlDiagram.png}%
+\caption{Motor Communication Diagram}
+\label{Fig:MotorControl}
+\end{figure}
 
 \subsection{Vehicle Safe State}
 The electric vehicles safe state causes the only conductors that leave the battery box to be galvanically isolated from the batteries. It also causes the solar array to be disconnected from the electrical systems. 
@@ -85,33 +96,6 @@ The battery voltage is proportional to charge and so by monitoring the voltage a
 \subsection{Strain Gauges}
 In order to improve future designs of structural components within the vehicle strain gauges are fitted on to them so the performance of structural components can be monitored and analysed. [NEED MORE DETAIL]
 
-\section{Motor Communication}
-[DIAGRAM SHOWING THE COMMUNICATION TO THE MOTOR CONTROLLER PROCESS]
-
-[EXPLANATION OF DIAGRAM]
-
-\section{Dashboard and Main Controller}
-[PICTURE OF FINAL DASHBOARD]
-
-[BRIEF DESCRIPTION OF HOW THE DRIVER CAN INTERFACE WITH IT]
-The driver is able to interface with the dashboard / main controller through several switches. Firstly are the two switches which are wired to the dashboard; they can be used to configure what data is shown on the $7$ Segment Displays. For example, the left display could always show speed and the right display can toggle between battery level and temperature using the switches.
-
-In addition to this there are two potentiometers which are connected to the break and acceleration pedals. The signal from this is converted into a digital signal using the ADC within the Launchpad. These signals are used to set the car's speed. There are also two more switches, one is ignition and the other is the directional indicator.
-
-
-[BLOCK DIAGRAM/SCHEMATIC OF MAIN CONTROLLER/DASHBOARD]
-The schematic of the dashboard can be found in Figure \ref{fig:dashboard_schematic}. This board is to be directly connected to the main controller board, the schematic of which can be found [ADD MAINBOARD SCHEMATIC].
-\begin{figure}[H]%
-\includegraphics[width=\columnwidth]{dashboard_schematic.jpg}%
-\caption{Dashboard Schematic}%
-\label{fig:dashboard_schematic}%
-\end{figure}
-
-[EXPLANATION OF WHAT INPUTS THE MAIN CONTROLLER HANDLES AND WHAT OUTPUTS IT CONTROLS]
-
-[EXPLANATION OF SAFETY FEATURES AND REDUNDANCIES BUILT INTO THE SYSTEM]
-
-[VOLTAGE REGULATION INFO COULD GO HERE]
 
 \section{Telemetry}
 A crucial part of the project is the system that handles the large volume of data the CAN bus receives. This system must be able to efficiently store data, facilitate the sending of operation critical messages and provide meaningful feedback to the client.Telemetry is required to effectively analyze the system with both quantitative and qualitative data. This data will allow engineers to monitor the status of the system and make important decisions which could affect its performance. The proposed system can be broken down as follows: a CAN bus interface, a data logger, an SQL database, a graphical user interface to allow engineers to remotely access and send data.
@@ -145,5 +129,5 @@ Once the data has been saved to the SQL server, the engineers can access or send
 This is clearly a very powerful system allowing telemetry data to be sent and received from, theoretically,  anywhere in the world. If for example the nodes where in fact not just sensors but active components, it would be conceivable to drive the car from anywhere with an internet connection, thousands of miles away from the car itself.
 
 \section{Voltage Rails}
-In order to create 12V and 5V rails from the 48V unregulated batteries the LM2576HV was used as a buck converter to regulate and step down the voltage. However, the 3A maximum output current would not be enough to power all the systems within the vehicle. To resolve this issue several modules where used and daisy chained together in order to provide rails which can provide a sufficient amount of power for all the systems. 
+In order to create 12V and 5V rails from the 48V unregulated batteries the LM2576HV was used as a buck converter to regulate and step down the voltage. However, the 3A maximum output current would not be enough to power all the systems within the vehicle. To resolve this issue several modules where used and daisy chained together in order to provide rails which can provide a sufficient amount of power for all the systems. [USES TI CHIP SO THOUGHT SHOULD ADD THIS. NOT SURE IF I SHOULD INCLUDE A SCHEMATIC] 
 \end{document}
