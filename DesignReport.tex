@@ -64,7 +64,11 @@ The electric vehicles safe state causes the only conductors that leave the batte
 
 In order to enter this state a normally closed button wired in series to the relay control mechanism is pressed. This will interrupt power to the relay control which will cause the relays to return to their normally open position.
 
-[RELAY CONTROL MECHANISM]
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{RelayControl.png}%
+\caption{Relay Control Mechanism}
+\label{Fig:RelayControl}
+\end{figure}
 
 In order to close a relay a 5V signal must be sent from a micro controller which feeds into a Darlington Transistor which controls a 12V signal which is then wired up to the coils of normally open relays. So when both a 5V signal and a 12V rail is attached the relays will close. TO enter the safe state the 12V or the 5V rail must be deactivated which is done by controlling a relay wired in series to the rails.
 
@@ -72,7 +76,12 @@ Only a few devices can control the 5V signal which can be used to disconnect ind
 
 Once in the safe state the problem of exiting the safe state arises. Both the 12V and 5V rail have to be enabled to exit the safe state, as opposed to entering which only required disabling one of the rails. Furthermore, the driver must be able to do this from within the drivers seat meaning the system must be galvanically isolated. In order to do this a seperate isolated DCDC converter is used. This supply can control the relays necessary to exit the safe state and so by wiring up a mechanical switch the driver can easily exit the safe state
 
-[NEED PICTURES (LOTS OF)]
+\begin{figure}[H]
+\includegraphics[width=\columnwidth]{SafeStateIsolated.png}%
+\caption{Galvanically Isolated Relay Control}
+\label{Fig:IsolatedControl}
+\end{figure}
+
 
 \section{Sensors}
 The sensors attached to the vehicle will allow the team to better analyse and predict the vehicles behaviour as well as offering forewarnings for future issues sensor data may also be used to further refine future designs of key components. Sensors will interface with a micro controller which will do some pre processing of the data before sending the data onto the CAN bus. It will then be logged on the data logger and sent via the telemetry system to the team. Some sensor data will also be displayed directly to the driver. 
