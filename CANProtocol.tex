@@ -109,7 +109,6 @@
 	1 & 1 & 0 & 0 & 1 & 0 & 0 &	1 & 0 & 0 & 0 &
 	0 & 0 & 1 & 1 & 1 & 1 & 1 & 1 &
 	1 & 0 & 0 & 1 & 0 & 1 & 1 & 0 \\
-<<<<<<< HEAD
 };
 \end{scope}
 \draw[dashed, black] (canframe-1-20.south west) to[out=-120, in=90, distance = 5em] (dats-2-1.north west);
@@ -241,12 +240,6 @@
 %Data Field
 \node[below right] (DataField) at ($(Int13) + (11*0.7,-2.7em)$){Data};
 \draw[->,thick,black] ($(DataField.south west)+(0,-1em)$) -- ++(3em,0);
-	\tiny 1 & \tiny 2 & \tiny 3 & \tiny 4 & \tiny 5 & \tiny 6 & \tiny 7 & \tiny 8 & \tiny 9 & \tiny 10 & \tiny 11 & \tiny 12 & \tiny 13 & \tiny 14 & \tiny 15 & \tiny 16 & \tiny 17 & \tiny 18 & \tiny 19 & \tiny 20 & \tiny 21 & \tiny 22 & \tiny 23 & \tiny 24 & \tiny 25 & \tiny 26 & \tiny 27 & \tiny 28 & \tiny 29 & \tiny 30 & \tiny 31 & \tiny 32
-	\\
-=======
->>>>>>> 944cdae9f50284cea608c0927dacd3ed9d3d4bbc
-};
-\end{scope}
 \draw[dashed, black] (canframe-1-20.south west) to[out=-120, in=90, distance = 5em] (dats-2-1.north west);
 \draw[dashed, black] (canframe-1-23.south east) to[out=-60, in=90, distance = 5em] (dats-2-32.north east);
 \draw[thick,black] (dats-2-1.north west) -- (dats-2-32.north east);
@@ -277,7 +270,7 @@
 
 
 %Error
-\node[below right] (ERR) at (dats-2-17.south west){\footnotesize ERROR};
+%\node[below right] (ERR) at (dats-2-17.south west){\footnotesize ERROR}; 
 
 %Error ID
 \node [below = 3em of {$(dats-2-17.west)!0.5!(dats-2-24.east)$}, align=center,style={text height=0.7em, text depth = 0em}] (Error) {Error ID};
