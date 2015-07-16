@@ -1,0 +1,20 @@
+The sensors attached to the vehicle will allow the team to better analyse and predict the vehicles behaviour as well as offering forewarnings for future issues sensor data may also be used to further refine future designs of key components. Sensors will interface with a micro controller which will do some pre processing of the data before sending the data onto the CAN bus. It will then be logged on the data logger and sent via the telemetry system to the team. Some sensor data will also be displayed directly to the driver. 
+
+\subsection{Temperature}
+A Dallas one wire bus is used to interface temperature sensors from around the car. The micro controller will then monitor for any abnormal behaviour to alert the driver of as well as sending all the temperature data to the data logger. [INCLUDE SCHEMATIC]
+
+\subsection{Light Sensors}
+Photodiodes attached to the photo voltaic array will allow the monitoring of individual solar panels. The data from the the photo diodes coupled with the current monitors attached to the output of the MPPTs allow for the performance of the array to be monitored as well as allowing the detection of oncoming failures before they are able to become catastrophic. The data will also allow improvements to be made on the design of future MPPTs and solar arrays. [SCHEMATIC] 
+
+\subsection{GPS}
+The Beagle Bone black is fitted with a GPS module which allows for an accurate time source within the vehicle as well as a secondary speed measurement. [NEED MORE INFO HERE]
+
+\subsection{Current Monitoring}
+Detecting the current produced from the solar array as well as the current the batteries output allows key data on power consumption and generation to be gathered. In order to measure the current hall effect based sensors are used within the vehicle. [MORE DETAIL NEEDED]
+
+\subsection{Battery Voltage}
+
+The battery voltage is proportional to charge and so by monitoring the voltage a rough estimation on the state of charge can be found. It also allows for the health of the batteries to be monitored. The motor controller has a built in voltage transducer which measures the input voltage and even transmit this information over the CAN bus. This is the system currently in use which allows for a battery monitoring algorithm to be developed in the future.
+
+\subsection{Strain Gauges}
+In order to improve future designs of structural components within the vehicle strain gauges are fitted on to them so the performance of structural components can be monitored and analysed. [NEED MORE DETAIL]

@@ -1,0 +1,29 @@
+A crucial part of the project is the system that handles the large volume of data the CAN bus receives. This system must be able to efficiently store data, facilitate the sending of operation critical messages and provide meaningful feedback to the client.Telemetry is required to effectively analyze the system with both quantitative and qualitative data. This data will allow engineers to monitor the status of the system and make important decisions which could affect its performance. The proposed system can be broken down as follows: a CAN bus interface, a data logger, an SQL database, a graphical user interface to allow engineers to remotely access and send data.
+\begin{wrapfigure}{r}{0.5\textwidth}
+         \centering
+         \begin{subfigure}[b]{0.6\textwidth}
+              %   \includegraphics[width=\textwidth]{canusb}
+                 \caption{A CANUSB adaptor}
+                 \label{fig:CANUSB adaptor}
+         \end{subfigure}
+
+         \begin{subfigure}[b]{0.4\textwidth}
+              %   \includegraphics[width=\textwidth]{beaglebone}
+                 \caption{A Beagle Bone Black}
+                 \label{fig:Beable Bone Black}
+         \end{subfigure}
+
+         \begin{subfigure}[b]{0.5\textwidth}
+              %   \includegraphics[width=\textwidth]{server}
+                 \caption{A Server}
+                 \label{fig:Sever}
+         \end{subfigure}
+         \caption{Components of the telemetry system}\label{fig:telemetry}
+\end{wrapfigure}
+The first component of the telemetry system is the interface between the data logger and the CAN bus. This connection is made with an adapter which connects directly in between the CANBUS and the data logger which is then controlled by the data handling software on the data logger.
+
+The data is filtered by node and data type and is then saved to an SQL server running on the data logger. It is critically important that the data logger program can handle errors and consistently. If the program were to crash or incorrectly filter the data, the system could give incorrect data to the engineers leading to erroneous decisions or could completely stop working.
+
+Once the data has been saved to the SQL server, the engineers can access or send data remotely over a tcp connection via a separate program on their computer.
+
+This is clearly a very powerful system allowing telemetry data to be sent and received from, theoretically,  anywhere in the world. If for example the nodes where in fact not just sensors but active components, it would be conceivable to drive the car from anywhere with an internet connection, thousands of miles away from the car itself.
