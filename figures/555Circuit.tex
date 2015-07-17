@@ -66,13 +66,13 @@
     |- (rightfet.G);
     
     %Connections on transistors
-    \draw (leftfet.S) node[below right]{To left indicators}
+    \draw (leftfet.S) node[right]{To left indicators}
     to[short,-o] (leftfet.S);
-    \draw (rightfet.S) node[below right]{To right indicators}
+    \draw (rightfet.S) node[right]{To right indicators}
     to[short,-o] (rightfet.S);
-    \draw (leftfet.D) node[above]{12V}
+    \draw (leftfet.D) node[right]{12V}
     to[short,-o] (leftfet.D);
-    \draw (rightfet.D) node[above]{12V}
+    \draw (rightfet.D) node[right]{12V}
     to[short,-o] (rightfet.D);
     \end{tikzpicture}
 %\end{document}

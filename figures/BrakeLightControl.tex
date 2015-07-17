@@ -1,0 +1,16 @@
+\begin{tikzpicture}[every node/.style = {font = \footnotesize},european]
+    \draw (0,0) node[left]{12V}  % from top Vcc to bottom Gnd
+    to[short,o-*] (3,0);
+    \draw (3,0) |- (3,1)
+    to[closing switch,l^=Handbrake Switch] (5,1)
+    to[short,-*] (5,0);
+    \draw (3,0) |- (3,-1)
+    to[closing switch,l_=Brake Pedal Micro-switch] (5,-1)
+    -- (5,0);
+    \draw (8,0) node[nigfete] (brakefet) {};
+    \draw (5,0) -| (brakefet.G);
+    \draw (brakefet.S) node[right]{To brake lights}
+    to[short,-o] (brakefet.S);
+    \draw (brakefet.D) node[right]{12V}
+    to[short,-o] (brakefet.D);
+\end{tikzpicture}
