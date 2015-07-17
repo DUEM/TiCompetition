@@ -1,9 +1,78 @@
-  \begin{center}
-    \begin{circuitikz}
-      \draw (0,0)
-      to[V,v=$U_q$] (0,2) % The voltage source
-      to[short] (2,2)
-      to[R=$R_1$] (2,0) % The resistor
-      to[short] (0,0);
-    \end{circuitikz}
-  \end{center}
+%\documentclass{standalone}
+%\usepackage[latin1]{inputenc}
+%\usepackage{amsmath}
+%\usepackage{amsfonts}
+%\usepackage{amssymb}
+%\usepackage{makeidx}
+%\usepackage{graphicx}
+%\usepackage{caption}
+%\usepackage{subcaption}
+%\usepackage{float}
+%\usepackage{wrapfig}
+%\usepackage[left=1.00in, right=1.00in, top=1.00in, bottom=1.00in]{geometry}
+%\usepackage{tikz}
+%\usepackage{circuitikz}
+%\usepackage{newclude}
+%\usepackage{calc}
+%\usetikzlibrary{matrix,positioning,calc,intersections,arrows,fadings}
+
+%\begin{document}
+		
+  	\tikzstyle{icdev}=[draw, text width=6em, minimum height=8em]
+  	
+    \begin{tikzpicture}[every node/.style = {font = \footnotesize},european]
+    \draw (0,6) node[left]{12V}  % from top Vcc to bottom Gnd
+    to[short,o-,] (1,6)
+    to[R] (1,4) 
+    to[R] (1,2)
+    to[C] (1,0)
+    to[short,-o] (0,0) node[left]{GND}
+    ;
+    \draw (4,3) node[icdev] (555)  {};  % position IC device body
+    % top terminal lines/pins - 4 RESET, 8 V+
+    \path [draw](1,6) -| ($(555.north)+(-0.5,0)$) node[below]{RESET} node[above left]{4};
+    \path [draw](1,6) -| ($(555.north)+(0.5,0)$) node[below]{V+} node[above left] {8};
+    % leftside terminal lines/pins - 7 DIS, 6 THR, 2 TRG
+    \path [draw](2,4) |- ($(555.west)+(0,2/4)$) node[right]{DIS} node[above left]{7};
+    \path [draw](2,2) |- ($(555.west)+(0,0/4)$) node[right]{TRG} node[above left]{2};
+    \path [draw](2,2) |- ($(555.west)+(0,-2/4)$) node[right]{THR} node[above left]{6};
+    \draw (1,4) 
+    to[short,*-] (2,4);
+    \draw (1,2) 
+    to[short,*-] (2,2)
+    to[short,-*] (2,2.5);
+    
+    % bottom terminal lines/pins - 1 GND, 5 CTRL
+    \path [draw](0,0) -| ($(555.south)+(-0.5,0)$) node[above]{GND} node[below left]{1};
+    \draw(0,0) to[short,-*] (3.5,0)
+    to[short] (4.5,0)
+    to[C]($(555.south)+(0.5,0)$)  
+    node[above]{CTRL} node[below left]{5}; % C = 10nf
+
+    % rightside terminal line/pin - 3 out
+    \draw (555.east) node[left]{Out} node[above right]{3}
+    to[short,-*] (6,3);
+    
+    %Position Transistors
+    \draw (8,1) node[nigfete] (leftfet) {};
+    \draw (8,5) node[nigfete] (rightfet) {};
+    
+    %Switches and transistors
+    \draw (6,3) 
+    to[closing switch] (6,0.75) 
+    |- (leftfet.G);
+    \draw (6,3)
+    to[closing switch] (6,4.75)
+    |- (rightfet.G);
+    
+    %Connections on transistors
+    \draw (leftfet.S) node[below right]{To left indicators}
+    to[short,-o] (leftfet.S);
+    \draw (rightfet.S) node[below right]{To right indicators}
+    to[short,-o] (rightfet.S);
+    \draw (leftfet.D) node[above]{12V}
+    to[short,-o] (leftfet.D);
+    \draw (rightfet.D) node[above]{12V}
+    to[short,-o] (rightfet.D);
+    \end{tikzpicture}
+%\end{document}
