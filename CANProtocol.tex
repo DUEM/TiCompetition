@@ -3,7 +3,7 @@
 [PRETTY SCHEMATIC/BLOCK DIAGRAM TO DO WITH CAN]\\
 
 [EXPLANATION OF PRETTY PICTURE AND VERY BRIEF SUMMARY]\\
-
+\begin{figure}[H]
 \begin{tikzpicture} [every node/.style={text height=0.7em}]
 \matrix(canframe)[matrix of nodes, nodes in empty cells, align=center, style={text width=0.7em}]
 {
@@ -282,3 +282,6 @@
 %Error Hatch
 \fill[color=black, opacity=0.1] (dats-2-17.south west) rectangle ($(Int14) +(0,-1em)$);
 \end{tikzpicture}
+\caption{CAN Frame}
+\label{Fig:CANFrame}
+\end{figure}

@@ -7,7 +7,8 @@ Apart from being able to control systems the driver must also be relayed importa
 To comply with regulations the vehicle must have indicators which alert other road users of the drivers intentions. [REWORD A BIT CLUNKY] The indicators must pulse on and off at 90 pulses per minute when the indicators are active. 
 
 \begin{figure}[H]
-\includegraphics[width=\columnwidth]{555Circuit}%
+%\includegraphics[width=\columnwidth]{figures/555Circuit}% Image
+\include{figures/555Circuit}
 \caption{Wiring Diagram of the Indicator Drivers}
 \label{Fig:IndicatorWiring}
 \end{figure}
@@ -19,7 +20,7 @@ As shown in Figure \ref{Fig:IndicatorWiring} a 555 timer is used to control a 12
 Rear brake lights must be fitted to the vehicle which activate automatically when the driver activates the brakes. In order to detect when the driver applies the brakes a micro switch is fitted to the brake pedal and hand brake lever. The switches are wired in parallel and control the power going to the brake light drivers. 
 
 \begin{figure}[H]
-\includegraphics[width=\columnwidth]{BrakeLightControl.png}%
+\includegraphics[width=\columnwidth]{figures/BrakeLightControl}%
 \caption{Brake Light Control Schematic}
 \label{Fig:BrakeLightsWiring}
 \end{figure}
@@ -32,7 +33,7 @@ As the driver would likely be travelling at roughly the same speed for the entir
 The device which takes take of all the driver inputs is known as the main controller. The main controller reads the state of the accelerator pedal which acts as a dead man switch. If the accelerator is pressed the main controller then reads the value of the speed control which acts as an analogue input to the main controller. After encoding the analogue value it is sent over the CAN bus to the motor controller. A third input is attached to the main controller which controls whether the motor will go forwards, backwards or act as a brake. This tristate switch when in the forward state will cause the main controller to behave as previously described. When in the brake state it will cause the main controller to only send the motor controller a command which tells it to keep the motor stationary. This command will be sent until the switch is placed into another state. Finally, if the switch is placed into the reverse position the main controller will activate the rear view camera as well as altering the speed command that is sent to the motor controller such that it will cause the motor to rotate backwards.
 
 \begin{figure}[H]
-\includegraphics[width=\columnwidth]{MotorControlDiagram.png}%
+\includegraphics[width=\columnwidth]{figures/MotorControlDiagram.png}%
 \caption{Motor Communication Diagram}
 \label{Fig:MotorControl}
 \end{figure}
@@ -43,7 +44,7 @@ The electric vehicles safe state causes the only conductors that leave the batte
 In order to enter this state a normally closed button wired in series to the relay control mechanism is pressed. This will interrupt power to the relay control which will cause the relays to return to their normally open position.
 
 \begin{figure}[H]
-\includegraphics[width=\columnwidth]{RelayControl.png}%
+\includegraphics[width=\columnwidth]{figures/RelayControl.png}%
 \caption{Relay Control Mechanism}
 \label{Fig:RelayControl}
 \end{figure}
@@ -55,7 +56,7 @@ Only a few devices can control the 5V signal which can be used to disconnect ind
 Once in the safe state the problem of exiting the safe state arises. Both the 12V and 5V rail have to be enabled to exit the safe state, as opposed to entering which only required disabling one of the rails. Furthermore, the driver must be able to do this from within the drivers seat meaning the system must be galvanically isolated. In order to do this a seperate isolated DCDC converter is used. This supply can control the relays necessary to exit the safe state and so by wiring up a mechanical switch the driver can easily exit the safe state
 
 \begin{figure}[H]
-\includegraphics[width=\columnwidth]{SafeStateIsolated.png}%
+\includegraphics[width=\columnwidth]{figures/SafeStateIsolated.png}%
 \caption{Galvanically Isolated Relay Control}
 \label{Fig:IsolatedControl}
 \end{figure}
